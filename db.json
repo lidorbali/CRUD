@@ -1,9 +1,9 @@
 {
-  "posts": [
+  "product": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "desc": "test product",
+      "price": "23"
     }
   ],
   "comments": [
@@ -16,4 +16,4 @@
   "profile": {
     "name": "typicode"
   }
-}
+} 
