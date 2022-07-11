@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,45 +8,60 @@
   </head>
   <body>
     <script>
-      const server = "http://localhost:3000/product";
+      const server = "http://localhost:3000/products/";
 
       //get data from server
-      const getData = async () => {
-        const res = await fetch(server).then((response) => response.json());
-        console.log(res);
-      };
 
+      const getData = async () => {
+        let res = await fetch(server).then((response) => response.json());
+        console.log(res);
+        display.innerHTML = res
+          .map(
+            (item, ind) => `<div>des: ${item.desc} <br> price: ${item.price} <br>
+             <button onclick=delData(${item.id})>delete</button>
+             <hr></div>`
+          )
+          .join("");
+      };
 
       //add data
       const addData = async () => {
-        const data = {   
-      "desc": "test sec",
-      "price": "26"
-    };
-    fetch(server, {
-            method: "POST"
-            Headers: {"content-type":"application/json"
-        },
-        body: JSON.stringify(data)
-
+        const data = {
+          desc: desc.value,
+          price: price.value,
+        };
+        fetch(server, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data),
         })
-        .then((response) => response.json())
-        .then((DataTransfer)=>{
-            console.log("Success:", data)
-        })
-        .catch((error)=>{
-            console.error("Error:", error)
-        })
-    },
-      
+          .then((response) => response.json())
+          .then((DataTransfer) => {
+            console.log("Success:", data);getData();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+              
+      };
 
+      // delete data from server
 
-        
-        
-        
+      const delData = async (id) => {
+        let res =await fetch(server + id, { method: "DELETE" });
+      getData();
+      };
     </script>
+
     <button onclick="getData()">show data</button>
-    <button onclick="getData()">delet data</button>
-    <button onclick="getData()">add data</button>
+
+    <button onclick="addData()">add data</button>
+    <div>
+      <br />
+      desc: <input id="desc" type="text" /><br />price:
+      <input id="price" type="text" />
+      <hr />
+    </div>
+    <div id="display"></div>
   </body>
 </html>

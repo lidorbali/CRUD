@@ -1,19 +1,24 @@
 {
-  "product": [
+  "products": [
     {
-      "id": 1,
-      "desc": "test product",
-      "price": "23"
-    }
-  ],
-  "comments": [
+      "desc": "p",
+      "price": "170",
+      "id": 2
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "desc": "la",
+      "price": "215",
+      "id": 3
+    },
+    {
+      "desc": "gmac",
+      "price": "215",
+      "id": 4
+    },
+    {
+      "desc": "or",
+      "price": "150",
+      "id": 5
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
-} 
+  ]
+}
