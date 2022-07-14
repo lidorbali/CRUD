@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- install axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
   </head>
 
   <body>
@@ -14,18 +15,35 @@
       const SERVER = "http://localhost:3000/products/";
       // get data from server
       const showData = async () => {
-        const res = await axios
-          .get(SERVER)
-          .then((res) => console.log(res.data));
+        let myRes
+        const res = await axios.get(SERVER).then(res => myRes=res.data)
+      console.log(myRes);
 
-        display.inneHTML = res
+        display.innerHTML = myRes
           .map(
             (item, ind) => `<div>des: ${item.desc} <br> price: ${item.price} <br>
              <button onclick=delData(${item.id})>delete</button>
              <hr></div>`
           )
           .join("");
+       };
+       // add data to the server
+      const addData = async () => {
+        // build data
+        const data = {
+          desc: desc.value,
+          price: price.value,
+        };
+ 
+        axios.post(SERVER, data);
       };
+       //   delete data from server
+       const delData = async (id) => {
+        await axios.delete(SERVER + id),
+        getData(); //update display
+      
+      };
+
     </script>
     <button onclick="showData()">show data</button>
 
